@@ -33,13 +33,20 @@ export default function App() {
     })
   }
 
+  const handleStartOver = () => {
+    setStep(1)
+    setActiveRegion(null)
+    setSelectedConditions({})
+    setGender('male')
+  }
+
   const totalSelected = Object.values(selectedConditions).reduce((sum, c) => sum + c.length, 0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#c1121f] to-[#8b0000] flex flex-col">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Header */}
       <header className="bg-[#c1121f] border-b border-red-900 shadow-lg">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center gap-4">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#c9a227] flex items-center justify-center shrink-0">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,11 +59,19 @@ export default function App() {
               <p className="text-red-200 text-xs">This is for brand new claims only that have never been claimed before.</p>
             </div>
           </div>
+          {step > 1 && (
+            <button
+              onClick={handleStartOver}
+              className="shrink-0 px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white text-xs font-semibold rounded-lg border border-white/30 transition-colors"
+            >
+              ↺ Start Over
+            </button>
+          )}
         </div>
       </header>
 
       {/* Progress */}
-      <div className="bg-white/95 border-b border-gray-200 shadow-sm">
+      <div className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-5xl mx-auto px-4">
           <ProgressBar step={step} />
         </div>
@@ -67,7 +82,7 @@ export default function App() {
         {step === 1 && (
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Body figure */}
-            <div className="bg-white/95 rounded-2xl shadow-xl p-5 flex flex-col items-center lg:w-80 shrink-0">
+            <div className="bg-white rounded-2xl shadow-lg p-5 flex flex-col items-center lg:w-80 shrink-0">
               <h2 className="text-[#c1121f] font-bold text-base mb-1">Body Map</h2>
               <p className="text-gray-500 text-xs text-center mb-4">Click any region to select injuries</p>
               <BodyFigure
@@ -81,7 +96,7 @@ export default function App() {
 
             {/* Right panel */}
             <div className="flex-1 flex flex-col gap-4 min-w-0">
-              <div className="bg-white/95 rounded-2xl shadow-xl p-5 flex-1 overflow-y-auto" style={{ maxHeight: '640px' }}>
+              <div className="bg-white rounded-2xl shadow-lg p-5 flex-1 overflow-y-auto" style={{ maxHeight: '640px' }}>
                 <InjurySummary
                   selectedConditions={selectedConditions}
                   onRegionClick={handleRegionClick}
@@ -106,6 +121,7 @@ export default function App() {
             onBack={() => setStep(1)}
             onNext={() => setStep(3)}
             onRemoveCondition={handleRemoveCondition}
+            onStartOver={handleStartOver}
           />
         )}
 
@@ -113,6 +129,7 @@ export default function App() {
           <SubmitScreen
             selectedConditions={selectedConditions}
             onBack={() => setStep(2)}
+            onStartOver={handleStartOver}
           />
         )}
       </main>

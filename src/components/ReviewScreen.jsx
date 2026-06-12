@@ -1,6 +1,6 @@
 import { injuryData } from '../data/injuryData'
 
-export default function ReviewScreen({ selectedConditions, onBack, onNext, onRemoveCondition }) {
+export default function ReviewScreen({ selectedConditions, onBack, onNext, onRemoveCondition, onStartOver }) {
   const totalCount = Object.values(selectedConditions).reduce((sum, c) => sum + c.length, 0)
   const hasAny = totalCount > 0
 
@@ -9,7 +9,7 @@ export default function ReviewScreen({ selectedConditions, onBack, onNext, onRem
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="bg-[#c1121f] px-6 py-5">
           <h2 className="text-white text-xl font-bold">Review Your Selected Injuries</h2>
-          <p className="text-blue-200 text-sm mt-1">
+          <p className="text-red-200 text-sm mt-1">
             {totalCount} condition{totalCount !== 1 ? 's' : ''} selected across{' '}
             {Object.values(selectedConditions).filter((c) => c.length > 0).length} body region{Object.values(selectedConditions).filter((c) => c.length > 0).length !== 1 ? 's' : ''}
           </p>
@@ -59,23 +59,31 @@ export default function ReviewScreen({ selectedConditions, onBack, onNext, onRem
           )}
         </div>
 
-        <div className="px-6 pb-6 flex gap-3">
+        <div className="px-6 pb-6 flex flex-col gap-3">
+          <div className="flex gap-3">
+            <button
+              onClick={onBack}
+              className="flex-1 py-3 border-2 border-[#c1121f] text-[#c1121f] rounded-xl font-semibold hover:bg-red-50 transition-colors"
+            >
+              ← Back to Body Map
+            </button>
+            <button
+              onClick={onNext}
+              disabled={!hasAny}
+              className={`flex-1 py-3 rounded-xl font-semibold transition-colors ${
+                hasAny
+                  ? 'bg-[#c9a227] text-white hover:bg-[#b8911f]'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              Proceed to Submit →
+            </button>
+          </div>
           <button
-            onClick={onBack}
-            className="flex-1 py-3 border-2 border-[#c1121f] text-[#c1121f] rounded-xl font-semibold hover:bg-blue-50 transition-colors"
+            onClick={onStartOver}
+            className="w-full py-2.5 text-sm text-gray-400 hover:text-red-600 transition-colors border border-gray-200 rounded-xl hover:border-red-300"
           >
-            ← Back to Body Map
-          </button>
-          <button
-            onClick={onNext}
-            disabled={!hasAny}
-            className={`flex-1 py-3 rounded-xl font-semibold transition-colors ${
-              hasAny
-                ? 'bg-[#c9a227] text-white hover:bg-[#b8911f]'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-            }`}
-          >
-            Proceed to Submit →
+            ↺ Start Over & Clear All Selections
           </button>
         </div>
       </div>

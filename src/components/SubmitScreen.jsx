@@ -15,7 +15,7 @@ function buildInjuryText(selectedConditions) {
   return lines.join('\n')
 }
 
-export default function SubmitScreen({ selectedConditions, onBack }) {
+export default function SubmitScreen({ selectedConditions, onBack, onStartOver }) {
   const [copied, setCopied] = useState(false)
   const scriptRef = useRef(null)
   const injuryText = buildInjuryText(selectedConditions)
@@ -120,7 +120,7 @@ export default function SubmitScreen({ selectedConditions, onBack }) {
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="bg-[#c1121f] px-6 py-4">
           <h3 className="text-white font-bold text-base">Submit Your Claim Information</h3>
-          <p className="text-blue-200 text-xs mt-0.5">Fill out the form below — a claims specialist will contact you</p>
+          <p className="text-red-200 text-xs mt-0.5">Fill out the form below — a claims specialist will contact you</p>
         </div>
         <div className="p-4">
           <iframe
@@ -134,12 +134,18 @@ export default function SubmitScreen({ selectedConditions, onBack }) {
         </div>
       </div>
 
-      <div className="pb-4">
+      <div className="pb-4 flex flex-col gap-3">
         <button
           onClick={onBack}
-          className="w-full py-3 border-2 border-[#c1121f] text-[#1e3a6e] rounded-xl font-semibold hover:bg-blue-50 transition-colors bg-white"
+          className="w-full py-3 border-2 border-[#c1121f] text-[#c1121f] rounded-xl font-semibold hover:bg-red-50 transition-colors bg-white"
         >
           ← Back to Review
+        </button>
+        <button
+          onClick={onStartOver}
+          className="w-full py-2.5 text-sm text-gray-400 hover:text-red-600 transition-colors border border-gray-200 rounded-xl hover:border-red-300 bg-white"
+        >
+          ↺ Start Over & Clear All Selections
         </button>
       </div>
     </div>
