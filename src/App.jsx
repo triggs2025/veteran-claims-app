@@ -55,8 +55,8 @@ export default function App() {
               </svg>
             </div>
             <div>
-              <h1 className="text-white font-bold text-lg leading-tight">VA Disability Claims Assistant</h1>
-              <p className="text-red-200 text-xs">This is for brand new claims only that have never been claimed before.</p>
+              <h1 className="text-white font-bold text-lg leading-tight">New Conditions Only</h1>
+              <p className="text-red-200 text-xs">Use this form only if the condition has never been claimed with the VA before. Do not use for previously denied conditions or requests for increased ratings.</p>
             </div>
           </div>
           {step > 1 && (
