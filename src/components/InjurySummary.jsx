@@ -24,7 +24,7 @@ export default function InjurySummary({ selectedConditions, onRegionClick }) {
         return (
           <div key={regionId} className="bg-blue-50 rounded-lg p-3 border border-blue-200">
             <div className="flex items-start justify-between gap-2">
-              <h4 className="text-xs font-bold text-[#1e3a6e] uppercase tracking-wide mb-1 flex-1">
+              <h4 className="text-xs font-bold text-[#c1121f] uppercase tracking-wide mb-1 flex-1">
                 {region?.label}
               </h4>
               {onRegionClick && (

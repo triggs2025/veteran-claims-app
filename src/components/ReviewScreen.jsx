@@ -7,7 +7,7 @@ export default function ReviewScreen({ selectedConditions, onBack, onNext, onRem
   return (
     <div className="max-w-2xl mx-auto w-full">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div className="bg-[#1e3a6e] px-6 py-5">
+        <div className="bg-[#c1121f] px-6 py-5">
           <h2 className="text-white text-xl font-bold">Review Your Selected Injuries</h2>
           <p className="text-blue-200 text-sm mt-1">
             {totalCount} condition{totalCount !== 1 ? 's' : ''} selected across{' '}
@@ -29,7 +29,7 @@ export default function ReviewScreen({ selectedConditions, onBack, onNext, onRem
                 return (
                   <div key={regionId} className="border border-gray-200 rounded-xl overflow-hidden">
                     <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                      <h3 className="font-bold text-[#1e3a6e] text-sm uppercase tracking-wide">
+                      <h3 className="font-bold text-[#c1121f] text-sm uppercase tracking-wide">
                         {region?.label}
                       </h3>
                     </div>
@@ -62,7 +62,7 @@ export default function ReviewScreen({ selectedConditions, onBack, onNext, onRem
         <div className="px-6 pb-6 flex gap-3">
           <button
             onClick={onBack}
-            className="flex-1 py-3 border-2 border-[#1e3a6e] text-[#1e3a6e] rounded-xl font-semibold hover:bg-blue-50 transition-colors"
+            className="flex-1 py-3 border-2 border-[#c1121f] text-[#c1121f] rounded-xl font-semibold hover:bg-blue-50 transition-colors"
           >
             ← Back to Body Map
           </button>

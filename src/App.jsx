@@ -36,9 +36,9 @@ export default function App() {
   const totalSelected = Object.values(selectedConditions).reduce((sum, c) => sum + c.length, 0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a1f44] to-[#1e3a6e] flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-[#c1121f] to-[#8b0000] flex flex-col">
       {/* Header */}
-      <header className="bg-[#0a1f44] border-b border-blue-800 shadow-lg">
+      <header className="bg-[#c1121f] border-b border-red-900 shadow-lg">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#c9a227] flex items-center justify-center shrink-0">
@@ -49,7 +49,7 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-white font-bold text-lg leading-tight">VA Disability Claims Assistant</h1>
-              <p className="text-blue-300 text-xs">Select your service-connected injuries to get started</p>
+              <p className="text-red-200 text-xs">This is for brand new claims only that have never been claimed before.</p>
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function App() {
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Body figure */}
             <div className="bg-white/95 rounded-2xl shadow-xl p-5 flex flex-col items-center lg:w-80 shrink-0">
-              <h2 className="text-[#1e3a6e] font-bold text-base mb-1">Body Map</h2>
+              <h2 className="text-[#c1121f] font-bold text-base mb-1">Body Map</h2>
               <p className="text-gray-500 text-xs text-center mb-4">Click any region to select injuries</p>
               <BodyFigure
                 selectedConditions={selectedConditions}
@@ -128,9 +128,9 @@ export default function App() {
       )}
 
       {/* Footer */}
-      <footer className="bg-[#0a1f44] border-t border-blue-900 mt-auto">
+      <footer className="bg-[#c1121f] border-t border-red-900 mt-auto">
         <div className="max-w-5xl mx-auto px-4 py-4">
-          <p className="text-blue-400 text-xs text-center leading-relaxed">
+          <p className="text-red-200 text-xs text-center leading-relaxed">
             This tool is for informational purposes only and does not constitute legal or medical advice.
             Always consult a VA-accredited claims agent or attorney.
           </p>

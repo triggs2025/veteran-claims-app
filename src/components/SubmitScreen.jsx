@@ -63,7 +63,7 @@ export default function SubmitScreen({ selectedConditions, onBack }) {
     <div className="max-w-2xl mx-auto w-full space-y-6">
       {/* Summary */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div className="bg-[#1e3a6e] px-6 py-5">
+        <div className="bg-[#c1121f] px-6 py-5">
           <h2 className="text-white text-xl font-bold">Your Injury Summary</h2>
           <p className="text-blue-200 text-sm mt-1">{totalCount} condition{totalCount !== 1 ? 's' : ''} selected</p>
         </div>
@@ -118,7 +118,7 @@ export default function SubmitScreen({ selectedConditions, onBack }) {
 
       {/* GHL Form */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div className="bg-[#1e3a6e] px-6 py-4">
+        <div className="bg-[#c1121f] px-6 py-4">
           <h3 className="text-white font-bold text-base">Submit Your Claim Information</h3>
           <p className="text-blue-200 text-xs mt-0.5">Fill out the form below — a claims specialist will contact you</p>
         </div>
@@ -137,7 +137,7 @@ export default function SubmitScreen({ selectedConditions, onBack }) {
       <div className="pb-4">
         <button
           onClick={onBack}
-          className="w-full py-3 border-2 border-[#1e3a6e] text-[#1e3a6e] rounded-xl font-semibold hover:bg-blue-50 transition-colors bg-white"
+          className="w-full py-3 border-2 border-[#c1121f] text-[#1e3a6e] rounded-xl font-semibold hover:bg-blue-50 transition-colors bg-white"
         >
           ← Back to Review
         </button>

@@ -15,7 +15,7 @@ export default function ProgressBar({ step }) {
                 step > s.num
                   ? 'bg-green-600 border-green-600 text-white'
                   : step === s.num
-                  ? 'bg-[#1e3a6e] border-[#1e3a6e] text-white'
+                  ? 'bg-[#c1121f] border-[#1e3a6e] text-white'
                   : 'bg-white border-gray-300 text-gray-400'
               }`}
             >
@@ -29,7 +29,7 @@ export default function ProgressBar({ step }) {
             </div>
             <span
               className={`text-xs mt-1 font-medium whitespace-nowrap ${
-                step === s.num ? 'text-[#1e3a6e]' : 'text-gray-400'
+                step === s.num ? 'text-[#c1121f]' : 'text-gray-400'
               }`}
             >
               {s.label}

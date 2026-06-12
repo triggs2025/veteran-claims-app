@@ -11,7 +11,7 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
     <div className="panel-slide-enter fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40"
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
       <div className="bg-white w-full sm:w-[480px] sm:max-w-full max-h-[80vh] rounded-t-2xl sm:rounded-2xl flex flex-col shadow-2xl">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-[#1e3a6e] rounded-t-2xl sm:rounded-t-2xl">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-[#c1121f] rounded-t-2xl sm:rounded-t-2xl">
           <div>
             <h3 className="text-white font-bold text-lg leading-tight">{region.label}</h3>
             <p className="text-blue-200 text-xs mt-0.5">38 CFR Recognized Conditions</p>
@@ -37,7 +37,7 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
                   key={condition}
                   className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                     isChecked
-                      ? 'border-[#1e3a6e] bg-blue-50'
+                      ? 'border-[#c1121f] bg-blue-50'
                       : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
                   }`}
                 >
@@ -45,9 +45,9 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
                     type="checkbox"
                     checked={isChecked}
                     onChange={() => onToggleCondition(activeRegion, condition)}
-                    className="mt-0.5 w-4 h-4 accent-[#1e3a6e] cursor-pointer shrink-0"
+                    className="mt-0.5 w-4 h-4 accent-[#c1121f] cursor-pointer shrink-0"
                   />
-                  <span className={`text-sm leading-snug ${isChecked ? 'text-[#1e3a6e] font-medium' : 'text-gray-700'}`}>
+                  <span className={`text-sm leading-snug ${isChecked ? 'text-[#c1121f] font-medium' : 'text-gray-700'}`}>
                     {condition}
                   </span>
                 </label>
@@ -65,7 +65,7 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
             </span>
             <button
               onClick={onClose}
-              className="px-5 py-2 bg-[#1e3a6e] text-white rounded-lg text-sm font-semibold hover:bg-[#162d57] transition-colors"
+              className="px-5 py-2 bg-[#c1121f] text-white rounded-lg text-sm font-semibold hover:bg-[#a00e19] transition-colors"
             >
               Done
             </button>
