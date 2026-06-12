@@ -35,25 +35,30 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
     }
   }, [])
 
-  const handleCopy = async () => {
+  const handleCopy = () => {
+    const ta = document.createElement('textarea')
+    ta.value = injuryText
+    ta.setAttribute('readonly', '')
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:2em;height:2em;padding:0;border:none;outline:none;box-shadow:none;background:transparent;opacity:0;'
+    document.body.appendChild(ta)
+    ta.focus()
+    ta.select()
+    ta.setSelectionRange(0, 99999)
+    let success = false
     try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(injuryText)
-      } else {
-        const ta = document.createElement('textarea')
-        ta.value = injuryText
-        ta.style.position = 'fixed'
-        ta.style.opacity = '0'
-        document.body.appendChild(ta)
-        ta.focus()
-        ta.select()
-        document.execCommand('copy')
-        document.body.removeChild(ta)
-      }
+      success = document.execCommand('copy')
+    } catch {}
+    document.body.removeChild(ta)
+    if (success) {
       setCopied(true)
       setTimeout(() => setCopied(false), 3000)
-    } catch {
-      setCopied(false)
+      return
+    }
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(injuryText).then(() => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 3000)
+      }).catch(() => setCopied(false))
     }
   }
 
