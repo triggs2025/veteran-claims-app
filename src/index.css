@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  background: #f0f4f8;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.body-region {
+  transition: fill 0.15s ease, opacity 0.15s ease;
+  cursor: pointer;
+}
+
+.body-region:hover {
+  fill: #f59e0b;
+  opacity: 0.85;
+}
+
+.body-region.selected {
+  fill: #1e40af;
+  opacity: 0.9;
+}
+
+.body-region.active-panel {
+  fill: #f59e0b;
+  opacity: 0.9;
+}
+
+.panel-slide-enter {
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.ghl-script-loaded {
+  display: none;
+}
