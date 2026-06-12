@@ -65,15 +65,15 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="bg-[#c1121f] px-6 py-5">
           <h2 className="text-white text-xl font-bold">Your Injury Summary</h2>
-          <p className="text-blue-200 text-sm mt-1">{totalCount} condition{totalCount !== 1 ? 's' : ''} selected</p>
+          <p className="text-red-200 text-sm mt-1">{totalCount} condition{totalCount !== 1 ? 's' : ''} selected</p>
         </div>
         <div className="p-5 space-y-3">
           {Object.entries(selectedConditions).map(([regionId, conditions]) => {
             if (!conditions.length) return null
             const region = injuryData[regionId]
             return (
-              <div key={regionId} className="bg-blue-50 rounded-lg p-3 border border-blue-100">
-                <h4 className="text-xs font-bold text-[#1e3a6e] uppercase tracking-wide mb-1">{region?.label}</h4>
+              <div key={regionId} className="bg-red-50 rounded-lg p-3 border border-red-100">
+                <h4 className="text-xs font-bold text-[#c1121f] uppercase tracking-wide mb-1">{region?.label}</h4>
                 <ul className="space-y-0.5">
                   {conditions.map((c) => (
                     <li key={c} className="text-sm text-gray-700 flex items-start gap-1.5">
@@ -90,14 +90,14 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
 
       {/* Copy box */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200 bg-[#c9a227] flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-gray-200 bg-[#c9a227] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <h3 className="text-white font-bold text-base">Copy Your Injuries</h3>
-            <p className="text-yellow-100 text-xs mt-0.5">Paste this into the "Notes" field in the form below</p>
+            <p className="text-yellow-100 text-xs mt-0.5">Paste this into the "Selected Injuries" field in the form below</p>
           </div>
           <button
             onClick={handleCopy}
-            className={`px-4 py-2 rounded-lg text-sm font-bold border-2 transition-all ${
+            className={`w-full sm:w-auto px-4 py-2 rounded-lg text-sm font-bold border-2 transition-all ${
               copied
                 ? 'bg-green-500 border-green-500 text-white'
                 : 'bg-white border-white text-[#c9a227] hover:bg-yellow-50'
@@ -111,7 +111,7 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
             readOnly
             value={injuryText}
             rows={10}
-            className="w-full text-xs font-mono bg-gray-50 border border-gray-200 rounded-lg p-3 resize-none text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="w-full text-xs font-mono bg-gray-50 border border-gray-200 rounded-lg p-3 resize-none text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300"
           />
         </div>
       </div>
@@ -122,10 +122,10 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
           <h3 className="text-white font-bold text-base">Submit Your Claim Information</h3>
           <p className="text-red-200 text-xs mt-0.5">Fill out the form below — a claims specialist will contact you</p>
         </div>
-        <div className="p-4">
+        <div className="p-2 sm:p-4">
           <iframe
             src="https://api.leadconnectorhq.com/widget/form/8pQ9tSlsddVkPThwoVbJ"
-            style={{ width: '100%', border: 'none', minHeight: '600px' }}
+            style={{ width: '100%', border: 'none', minHeight: '900px', display: 'block' }}
             id="inline-8pQ9tSlsddVkPThwoVbJ"
             data-layout='{"id":"INLINE"}'
             data-trigger-type="alwaysShow"
