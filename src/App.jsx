@@ -62,7 +62,7 @@ export default function App() {
           {step > 1 && (
             <button
               onClick={handleStartOver}
-              className="shrink-0 px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white text-xs font-semibold rounded-lg border border-white/30 transition-colors"
+              className="shrink-0 px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white text-xs font-black rounded-lg border border-white/30 transition-colors"
             >
               ↺ Start Over
             </button>

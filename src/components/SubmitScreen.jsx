@@ -143,7 +143,7 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
         </button>
         <button
           onClick={onStartOver}
-          className="w-full py-2.5 text-sm text-gray-400 hover:text-red-600 transition-colors border border-gray-200 rounded-xl hover:border-red-300 bg-white"
+          className="w-full py-2.5 text-sm font-black text-gray-400 hover:text-red-600 transition-colors border border-gray-200 rounded-xl hover:border-red-300 bg-white"
         >
           ↺ Start Over & Clear All Selections
         </button>

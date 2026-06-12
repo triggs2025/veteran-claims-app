@@ -81,7 +81,7 @@ export default function ReviewScreen({ selectedConditions, onBack, onNext, onRem
           </div>
           <button
             onClick={onStartOver}
-            className="w-full py-2.5 text-sm text-gray-400 hover:text-red-600 transition-colors border border-gray-200 rounded-xl hover:border-red-300"
+            className="w-full py-2.5 text-sm font-black text-gray-400 hover:text-red-600 transition-colors border border-gray-200 rounded-xl hover:border-red-300"
           >
             ↺ Start Over & Clear All Selections
           </button>
