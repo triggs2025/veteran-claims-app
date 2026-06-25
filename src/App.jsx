@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BodyFigure from './components/BodyFigure'
 import InjuryPanel from './components/InjuryPanel'
 import InjurySummary from './components/InjurySummary'
@@ -11,6 +11,10 @@ export default function App() {
   const [gender, setGender] = useState('male')
   const [activeRegion, setActiveRegion] = useState(null)
   const [selectedConditions, setSelectedConditions] = useState({})
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [step])
 
   const handleRegionClick = (regionId) => {
     setActiveRegion((prev) => (prev === regionId ? null : regionId))

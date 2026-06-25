@@ -1,6 +1,15 @@
+import { useEffect, useRef } from 'react'
 import { injuryData } from '../data/injuryData'
 
 export default function InjuryPanel({ activeRegion, selectedConditions, onToggleCondition, onClose }) {
+  const overlayRef = useRef(null)
+
+  useEffect(() => {
+    if (activeRegion) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [activeRegion])
+
   if (!activeRegion) return null
   const region = injuryData[activeRegion]
   if (!region) return null
@@ -14,7 +23,7 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-[#c1121f] rounded-t-2xl sm:rounded-t-2xl">
           <div>
             <h3 className="text-white font-bold text-lg leading-tight">{region.label}</h3>
-            <p className="text-blue-200 text-xs mt-0.5">38 CFR Recognized Conditions</p>
+            <p className="text-red-200 text-xs mt-0.5">38 CFR Recognized Conditions</p>
           </div>
           <button
             onClick={onClose}
