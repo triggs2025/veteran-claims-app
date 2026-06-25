@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react'
 import { injuryData } from '../data/injuryData'
 
 export default function InjuryPanel({ activeRegion, selectedConditions, onToggleCondition, onClose }) {
-  const overlayRef = useRef(null)
+  const panelRef = useRef(null)
 
   useEffect(() => {
-    if (activeRegion) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (activeRegion && panelRef.current) {
+      panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }, [activeRegion])
 
@@ -17,10 +17,9 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
   const selected = selectedConditions[activeRegion] || []
 
   return (
-    <div className="panel-slide-enter fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40"
-      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
-      <div className="bg-white w-full sm:w-[480px] sm:max-w-full max-h-[80vh] rounded-t-2xl sm:rounded-2xl flex flex-col shadow-2xl">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-[#c1121f] rounded-t-2xl sm:rounded-t-2xl">
+    <div ref={panelRef} className="w-full max-w-2xl mx-auto mt-6 scroll-mt-4">
+      <div className="bg-white rounded-2xl shadow-xl flex flex-col overflow-hidden border border-gray-200">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-[#c1121f] rounded-t-2xl">
           <div>
             <h3 className="text-white font-bold text-lg leading-tight">{region.label}</h3>
             <p className="text-red-200 text-xs mt-0.5">38 CFR Recognized Conditions</p>
@@ -36,7 +35,7 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
           </button>
         </div>
 
-        <div className="overflow-y-auto flex-1 px-5 py-4">
+        <div className="px-5 py-4">
           <p className="text-sm text-gray-500 mb-3">Select all conditions that apply to your service-connected injuries:</p>
           <div className="space-y-2">
             {region.conditions.map((condition) => {
@@ -46,8 +45,8 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
                   key={condition}
                   className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                     isChecked
-                      ? 'border-[#c1121f] bg-blue-50'
-                      : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
+                      ? 'border-[#c1121f] bg-red-50'
+                      : 'border-gray-200 hover:border-red-300 hover:bg-gray-50'
                   }`}
                 >
                   <input

@@ -84,39 +84,51 @@ export default function App() {
       {/* Main */}
       <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-6">
         {step === 1 && (
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Body figure */}
-            <div className="bg-white rounded-2xl shadow-lg p-5 flex flex-col items-center lg:w-80 shrink-0">
-              <h2 className="text-[#c1121f] font-bold text-base mb-1">Body Map</h2>
-              <p className="text-gray-500 text-xs text-center mb-4">Click any region to select injuries</p>
-              <BodyFigure
-                selectedConditions={selectedConditions}
-                activeRegion={activeRegion}
-                onRegionClick={handleRegionClick}
-                gender={gender}
-                onGenderToggle={() => setGender((g) => (g === 'male' ? 'female' : 'male'))}
-              />
-            </div>
-
-            {/* Right panel */}
-            <div className="flex-1 flex flex-col gap-4 min-w-0">
-              <div className="bg-white rounded-2xl shadow-lg p-5 flex-1 overflow-y-auto" style={{ maxHeight: '640px' }}>
-                <InjurySummary
+          <>
+            <div className="flex flex-col lg:flex-row gap-6">
+              {/* Body figure */}
+              <div className="bg-white rounded-2xl shadow-lg p-5 flex flex-col items-center lg:w-80 shrink-0">
+                <h2 className="text-[#c1121f] font-bold text-base mb-1">Body Map</h2>
+                <p className="text-gray-500 text-xs text-center mb-4">Click any region to select injuries</p>
+                <BodyFigure
                   selectedConditions={selectedConditions}
+                  activeRegion={activeRegion}
                   onRegionClick={handleRegionClick}
+                  gender={gender}
+                  onGenderToggle={() => setGender((g) => (g === 'male' ? 'female' : 'male'))}
                 />
               </div>
 
-              {totalSelected > 0 && (
-                <button
-                  onClick={() => { setActiveRegion(null); setStep(2) }}
-                  className="w-full py-4 bg-[#c9a227] text-white rounded-2xl font-bold text-base shadow-lg hover:bg-[#b8911f] transition-colors"
-                >
-                  Review {totalSelected} Selected Condition{totalSelected !== 1 ? 's' : ''} →
-                </button>
-              )}
+              {/* Right panel */}
+              <div className="flex-1 flex flex-col gap-4 min-w-0">
+                <div className="bg-white rounded-2xl shadow-lg p-5 flex-1 overflow-y-auto" style={{ maxHeight: '640px' }}>
+                  <InjurySummary
+                    selectedConditions={selectedConditions}
+                    onRegionClick={handleRegionClick}
+                  />
+                </div>
+
+                {totalSelected > 0 && (
+                  <button
+                    onClick={() => { setActiveRegion(null); setStep(2) }}
+                    className="w-full py-4 bg-[#c9a227] text-white rounded-2xl font-bold text-base shadow-lg hover:bg-[#b8911f] transition-colors"
+                  >
+                    Review {totalSelected} Selected Condition{totalSelected !== 1 ? 's' : ''} →
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
+
+            {/* Injury panel - inline below body map */}
+            {activeRegion && (
+              <InjuryPanel
+                activeRegion={activeRegion}
+                selectedConditions={selectedConditions}
+                onToggleCondition={handleToggleCondition}
+                onClose={() => setActiveRegion(null)}
+              />
+            )}
+          </>
         )}
 
         {step === 2 && (
@@ -137,16 +149,6 @@ export default function App() {
           />
         )}
       </main>
-
-      {/* Injury panel modal */}
-      {activeRegion && step === 1 && (
-        <InjuryPanel
-          activeRegion={activeRegion}
-          selectedConditions={selectedConditions}
-          onToggleCondition={handleToggleCondition}
-          onClose={() => setActiveRegion(null)}
-        />
-      )}
 
       {/* Footer */}
       <footer className="bg-[#c1121f] border-t border-red-900 mt-auto">
