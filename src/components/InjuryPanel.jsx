@@ -25,7 +25,7 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
             <p className="text-red-200 text-xs mt-0.5">38 CFR Recognized Conditions</p>
           </div>
           <button
-            onClick={() => { onClose(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+            onClick={onClose}
             className="text-white/70 hover:text-white transition-colors p-1"
             aria-label="Close panel"
           >
@@ -72,7 +72,7 @@ export default function InjuryPanel({ activeRegion, selectedConditions, onToggle
                 : 'No conditions selected'}
             </span>
             <button
-              onClick={() => { onClose(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              onClick={onClose}
               className="px-5 py-2 bg-[#c1121f] text-white rounded-lg text-sm font-semibold hover:bg-[#a00e19] transition-colors"
             >
               Done

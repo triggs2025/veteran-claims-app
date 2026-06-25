@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import BodyFigure from './components/BodyFigure'
 import InjuryPanel from './components/InjuryPanel'
 import InjurySummary from './components/InjurySummary'
@@ -11,9 +11,18 @@ export default function App() {
   const [gender, setGender] = useState('male')
   const [activeRegion, setActiveRegion] = useState(null)
   const [selectedConditions, setSelectedConditions] = useState({})
+  const topRef = useRef(null)
+
+  const scrollToTop = () => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    try { window.parent.postMessage({ type: 'scrollToTop' }, '*') } catch {}
+  }
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollToTop()
   }, [step])
 
   const handleRegionClick = (regionId) => {
@@ -48,6 +57,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
+      <div ref={topRef} />
       {/* Header */}
       <header className="bg-[#c1121f] border-b border-red-900 shadow-lg">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
@@ -125,7 +135,7 @@ export default function App() {
                 activeRegion={activeRegion}
                 selectedConditions={selectedConditions}
                 onToggleCondition={handleToggleCondition}
-                onClose={() => setActiveRegion(null)}
+                onClose={() => { setActiveRegion(null); scrollToTop() }}
               />
             )}
           </>
