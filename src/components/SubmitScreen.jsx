@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { injuryData } from '../data/injuryData'
 
 function buildInjuryText(selectedConditions) {
-  const lines = ['VA DISABILITY CLAIM — SELECTED SERVICE-CONNECTED CONDITIONS', '']
+  const lines = []
   Object.entries(selectedConditions).forEach(([regionId, conditions]) => {
     if (!conditions.length) return
     const region = injuryData[regionId]
@@ -10,15 +10,14 @@ function buildInjuryText(selectedConditions) {
     conditions.forEach((c) => lines.push(`  • ${c}`))
     lines.push('')
   })
-  lines.push('---')
-  lines.push('Generated via VA Disability Claims Assistant')
-  return lines.join('\n')
+  return lines.join('\n').trim()
 }
 
 export default function SubmitScreen({ selectedConditions, onBack, onStartOver }) {
-  const [copied, setCopied] = useState(false)
   const scriptRef = useRef(null)
   const injuryText = buildInjuryText(selectedConditions)
+  const encodedInjuries = encodeURIComponent(injuryText)
+  const ghlUrl = `https://api.leadconnectorhq.com/widget/form/8pQ9tSlsddVkPThwoVbJ?multi_line_3fbi=${encodedInjuries}`
 
   useEffect(() => {
     if (scriptRef.current) return
@@ -34,33 +33,6 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
       }
     }
   }, [])
-
-  const handleCopy = () => {
-    const ta = document.createElement('textarea')
-    ta.value = injuryText
-    ta.setAttribute('readonly', '')
-    ta.style.cssText = 'position:fixed;top:0;left:0;width:2em;height:2em;padding:0;border:none;outline:none;box-shadow:none;background:transparent;opacity:0;'
-    document.body.appendChild(ta)
-    ta.focus()
-    ta.select()
-    ta.setSelectionRange(0, 99999)
-    let success = false
-    try {
-      success = document.execCommand('copy')
-    } catch {}
-    document.body.removeChild(ta)
-    if (success) {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 3000)
-      return
-    }
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(injuryText).then(() => {
-        setCopied(true)
-        setTimeout(() => setCopied(false), 3000)
-      }).catch(() => setCopied(false))
-    }
-  }
 
   const totalCount = Object.values(selectedConditions).reduce((sum, c) => sum + c.length, 0)
 
@@ -93,32 +65,14 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
         </div>
       </div>
 
-      {/* Copy box */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200 bg-[#c9a227] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div>
-            <h3 className="text-white font-bold text-base">Copy Your Injuries</h3>
-            <p className="text-yellow-100 text-xs mt-0.5">Paste this into the "Selected Injuries" field in the form below</p>
-          </div>
-          <button
-            onClick={handleCopy}
-            className={`w-full sm:w-auto px-4 py-2 rounded-lg text-sm font-bold border-2 transition-all ${
-              copied
-                ? 'bg-green-500 border-green-500 text-white'
-                : 'bg-white border-white text-[#c9a227] hover:bg-yellow-50'
-            }`}
-          >
-            {copied ? '✓ Copied!' : 'Copy to Clipboard'}
-          </button>
-        </div>
-        <div className="p-5">
-          <textarea
-            readOnly
-            value={injuryText}
-            rows={10}
-            className="w-full text-xs font-mono bg-gray-50 border border-gray-200 rounded-lg p-3 resize-none text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300"
-          />
-        </div>
+      {/* Info banner */}
+      <div className="bg-green-50 border border-green-200 rounded-xl px-5 py-3 flex items-center gap-3">
+        <svg className="w-5 h-5 text-green-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+        <p className="text-sm text-green-800 font-medium">
+          Your selected injuries have been automatically added to the form below.
+        </p>
       </div>
 
       {/* GHL Form */}
@@ -129,7 +83,7 @@ export default function SubmitScreen({ selectedConditions, onBack, onStartOver }
         </div>
         <div className="p-2 sm:p-4">
           <iframe
-            src="https://api.leadconnectorhq.com/widget/form/8pQ9tSlsddVkPThwoVbJ"
+            src={ghlUrl}
             style={{ width: '100%', border: 'none', minHeight: '900px', display: 'block' }}
             id="inline-8pQ9tSlsddVkPThwoVbJ"
             data-layout='{"id":"INLINE"}'
