@@ -313,9 +313,15 @@ export default function BodyFigure({ selectedConditions, activeRegion, onRegionC
       </div>
 
       {/* Extra region buttons below figure */}
-      <div className="flex flex-wrap gap-2 mt-3 justify-center max-w-xs">
-        {['upperBack', 'lowerBack', 'skin'].map((id) => {
+      <div className="flex flex-wrap gap-2 mt-3 justify-center max-w-sm">
+        {[
+          'upperBack', 'lowerBack', 'skin', 'mentalHealth',
+          'neurological', 'endocrine', 'hematologic', 'infectiousDisease',
+          gender === 'male' ? 'genitourinaryMale' : 'genitourinaryFemale',
+          ...(gender === 'female' ? ['gynecological'] : []),
+        ].map((id) => {
           const region = injuryData[id]
+          if (!region) return null
           const hasSelections = selectedConditions[id]?.length > 0
           const isActive = activeRegion === id
           return (

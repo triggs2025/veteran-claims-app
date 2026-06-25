@@ -105,7 +105,23 @@ export default function App() {
                   activeRegion={activeRegion}
                   onRegionClick={handleRegionClick}
                   gender={gender}
-                  onGenderToggle={() => setGender((g) => (g === 'male' ? 'female' : 'male'))}
+                  onGenderToggle={() => {
+                    setGender((g) => {
+                      const next = g === 'male' ? 'female' : 'male'
+                      setSelectedConditions((prev) => {
+                        const cleaned = { ...prev }
+                        if (next === 'female') {
+                          delete cleaned.genitourinaryMale
+                        } else {
+                          delete cleaned.genitourinaryFemale
+                          delete cleaned.gynecological
+                        }
+                        return cleaned
+                      })
+                      setActiveRegion(null)
+                      return next
+                    })
+                  }}
                 />
               </div>
 
